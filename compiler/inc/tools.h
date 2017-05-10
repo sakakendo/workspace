@@ -278,7 +278,7 @@ void setWrite(char *fname,char *prog){
 		Info1("file open success %s",fname);
 	}
 	wl=fprintf(fp,prog);
-	if(progl=wl){
+	if(progl==wl){
 		Info2("prog write success");
 	}else {
 		Info2("prog write failed");
