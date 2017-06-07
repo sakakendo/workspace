@@ -7,9 +7,25 @@ struct list{
   char *name;
   struct list *prev;
   struct list *next;
+  int pos;
+  int type;
 };
 
-void addList(struct list *head,char *s){
+struct vlist{
+  char *name;
+  struct list *prev;
+  struct list *next;
+  int pos;  //memory address
+  int type; //scope,value,reserved
+}
+
+struct flist{
+  char *name;
+  struct list *prev;
+  struct list *next;
+  int pos;
+};
+void addList(struct list *head,char *s/*, mode (like func,value,scope)*/){
   struct list *next,*now=head;
   next=(struct list*)malloc(sizeof(struct list *));
   next->name=(char *)malloc(sizeof(char)*sizeof(s));
@@ -19,7 +35,12 @@ void addList(struct list *head,char *s){
   next->next=NULL;
 
   while(now->next!=NULL){
-    Log ("%s\n",now->name);
+    if( !strcmp(now->name,name) ){
+      Log ("%s has already defined\n",now->name);
+    }else{
+      Log ("not defined\n");
+    }
+//    Log ("%s\n",now->name);
     now=now->next;
   }
   now->next=next;
@@ -56,6 +77,5 @@ int main(){
   addList(value,"firstval");
   addList(value,"firstval");
   printListAll(value);
-
 
 }
