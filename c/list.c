@@ -33,14 +33,28 @@ void printListAll(struct list *head){
 }
 
 int main(){
-  struct list *first,*next;
+  struct list *first,*next,*now;
   //make head list
-  first=(struct list*)malloc(sizeof(struct list *));
+  first=(struct list*)malloc(sizeof(struct list));
   first->name=(char *)malloc(sizeof(char)*20);
   strcpy(first->name,"head");
   first->prev=NULL;
   first->next=NULL;
   //add next list
+  first->next=(struct list*)malloc(sizeof(struct list));
+  first->next->name=(char *)malloc(sizeof(char)*20);
+  strcpy(first->next->name,"next");
+  Log ("%s\n",first->name);
+  Log ("%s\n",first->next->name);
+//  first->next=next;
+//  next->prev=first;
+  first->next->next=NULL;
+
+  now=first;
+ while(now->next){
+    Log ("%s\n",now->name);
+    now=now->next;
+  }
 //  printf("fist name:%s \n",first->name);
   Log ("\n");
   printListAll(first);
