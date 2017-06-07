@@ -23,13 +23,16 @@ void addList(struct list *head,char *s){
   now->next=next;
 }
 
-void printListAll(struct list *head){
-  struct list*now=head;
-  do{
-    Log ("%s\n",now->name);
-    now=now->next;
-  }while(now->next!=NULL);
+void printListAll(struct list *now){
   Log ("\n");
+  do{
+    printf("%s ",now->name);
+    if(now->next==NULL){
+      break;
+    }else{
+      now=now->next;
+    }
+  }while(1);
 }
 
 int main(){
@@ -47,28 +50,14 @@ int main(){
   Log ("%s\n",first->name);
   Log ("%s\n",first->next->name);
   first->next->next=NULL;
-
-  now=first;
-  do{
-    Log ("name list:%s\n",now->name);
-    if(now->next==NULL){
-      Log ("no more list\n");
-      break;
-    }else{
-      Log ("next name is %s\n",now->next->name);
-      now=now->next;
-    }
-  }while(1);
     //  printf("fist name:%s \n",first->name);
   Log ("\n");
-  printListAll(first);
-  Log ("\n");
-  printListAll(first);
-  Log ("\n");
   addList(first,"newName");
-//  Log ("\n");
-//  printListAll(first);
-//  addList(first,"thirdName");
-//  printListAll(first);
-
+  printListAll(first);
+  addList(first,"secName");
+  addList(first,"thirdName");
+  addList(first,"fourthName");
+  addList(first,"fifthName");
+  printListAll(first);
+  Log ("\n");
 }
