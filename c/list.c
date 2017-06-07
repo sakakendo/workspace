@@ -46,16 +46,20 @@ int main(){
   strcpy(first->next->name,"next");
   Log ("%s\n",first->name);
   Log ("%s\n",first->next->name);
-//  first->next=next;
-//  next->prev=first;
   first->next->next=NULL;
 
   now=first;
- while(now->next){
-    Log ("%s\n",now->name);
-    now=now->next;
-  }
-//  printf("fist name:%s \n",first->name);
+  do{
+    Log ("name list:%s\n",now->name);
+    if(now->next==NULL){
+      Log ("no more list\n");
+      break;
+    }else{
+      Log ("next name is %s\n",now->next->name);
+      now=now->next;
+    }
+  }while(1);
+    //  printf("fist name:%s \n",first->name);
   Log ("\n");
   printListAll(first);
   Log ("\n");
