@@ -12,12 +12,14 @@ struct list{
 void addList(struct list *head,char *s){
   struct list *next,*now=head;
   next=(struct list*)malloc(sizeof(struct list *));
-  next->name=(char *)malloc(sizeof(char)*20);
-  next->name=s;
+  next->name=(char *)malloc(sizeof(char)*sizeof(s));
+  char *name=(char *)malloc(sizeof(char)*(sizeof(s)+sizeof("__VAL__")));
+  sprintf(name,"__VAL__%s",s);
+  next->name=name;
   next->next=NULL;
 
   while(now->next!=NULL){
-    Log ("%s",now->name);
+    Log ("%s\n",now->name);
     now=now->next;
   }
   now->next=next;
@@ -34,30 +36,26 @@ void printListAll(struct list *now){
     }
   }while(1);
 }
+//resreved
+// __HEAD__
+// __FUNC__ :scope
+// __VAL__  :valiable
+
+struct list* initList(){
+  struct list *tmp;
+  tmp=(struct list*)malloc(sizeof(struct list));
+  tmp->name=(char *)malloc(sizeof(char)*sizeof("__HEAD__"));
+  tmp->name="__HEAD__";
+  tmp->next=NULL;
+  tmp->prev=NULL;
+}
 
 int main(){
-  struct list *first,*next,*now;
-  //make head list
-  first=(struct list*)malloc(sizeof(struct list));
-  first->name=(char *)malloc(sizeof(char)*20);
-  strcpy(first->name,"head");
-  first->prev=NULL;
-  first->next=NULL;
-  //add next list
-  first->next=(struct list*)malloc(sizeof(struct list));
-  first->next->name=(char *)malloc(sizeof(char)*20);
-  strcpy(first->next->name,"next");
-  Log ("%s\n",first->name);
-  Log ("%s\n",first->next->name);
-  first->next->next=NULL;
-    //  printf("fist name:%s \n",first->name);
-  Log ("\n");
-  addList(first,"newName");
-  printListAll(first);
-  addList(first,"secName");
-  addList(first,"thirdName");
-  addList(first,"fourthName");
-  addList(first,"fifthName");
-  printListAll(first);
-  Log ("\n");
+  struct list *first;//,*next,*now;
+  struct list *value=initList();
+  addList(value,"firstval");
+  addList(value,"firstval");
+  printListAll(value);
+
+
 }
