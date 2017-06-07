@@ -1,0 +1,48 @@
+function myFunction() {
+  log = new Doc(logID);
+}
+
+Doc = function(id){
+  this.ID = id;
+  this.doc = DocumentApp.openById(this.ID); 
+  this.body = this.doc.getBody();
+  this.docText = this.body.editAsText();
+}
+
+Doc.prototype.print = function(str){
+  this.docText.appendText(str);
+}
+
+Doc.prototype.replace = function(src,dst){
+  this.body.replaceText(src,dst);
+}
+
+Doc.prototype.clear = function(){
+  this.body.clear();
+}
+
+Doc.prototype.getID = function(){
+  return this.ID;
+}
+
+Doc.prototype.waitSec = function(sec){
+  var start = new Date().getSeconds();
+  while((new Date().getSeconds()-start) < sec);
+}
+
+Doc.prototype.waitMiliSec = function(msec){
+  var start = new Date();
+  while((new Date()-start) < msec);
+}
+
+Doc.prototype.printTodayNow = function(){
+  var now = new Date();
+  var year = now.getYear();
+  var month = now.getMonth() + 1;
+  var day = now.getDate();
+  var hour = now.getHours();
+  var min = now.getMinutes();
+  var sec = now.getSeconds();
+  this.docText.appendText(year +'_'+ ("0"+month).slice(-2) +'_'+ ("0"+day).slice(-2) +' '+ 
+    ("0"+hour).slice(-2) +'-'+ ("0"+min).slice(-2) +'-'+ ("0"+sec).slice(-2));
+}
