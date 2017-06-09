@@ -17,7 +17,7 @@ struct vlist{
   struct list *next;
   int pos;  //memory address
   int type; //scope,value,reserved
-}
+};
 
 struct flist{
   char *name;
