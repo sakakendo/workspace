@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <time.h>
 
 #ifdef __linux__
 //#define BLUE(s)		"\e[34m"s"\e[37m"
@@ -14,19 +13,7 @@
 
 HANDLE hConsole;
 WORD saved_attributes;
-/*
-void SetConsoleTextAttributeRandom(HANDLE hConsole){
-  srand(time(NULL));
-  int pattern=2;
-  int n=rand()%pattern;
 
-  if(n==0){
-    SetConsoleTextAttribute(hConsole,FOREGROUND_BLUE);
-  }else  if(n==1){
-    SetConsoleTextAttribute(hConsole,FOREGROUND_RED);
-  }
-}
-*/
 enum LOG_CLASS{CLASS_ERROR,CLASS_WARNING,CLASS_INFO,CLASS_LOG};
 int printVA(int type,char *v,...){
   if(type==CLASS_ERROR)  SetConsoleTextAttribute(hConsole,FOREGROUND_RED);
@@ -48,6 +35,7 @@ int printVA(int type,char *v,...){
 #define Log(fmt, ...)       printVA(CLASS_LOG,"%-8s: %s: %d: "fmt "","Log", __FUNCTION__, __LINE__, __VA_ARGS__);
 
 
+__attribute__((constructor))
 void SetupColor(){
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     hConsole  = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -60,7 +48,6 @@ void SetupColor(){
 #endif
 
 int main() {
-  SetupColor();
   printf("normal\n");
 
   Error("hello %s","world")
@@ -69,5 +56,4 @@ int main() {
   Log("hello %s","world")
 
   printf("normal");
-    return 0;
 }
