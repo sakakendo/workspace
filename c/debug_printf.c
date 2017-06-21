@@ -42,13 +42,23 @@ void SetupColor(){
     /* Save current attributes */
     GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
     saved_attributes = consoleInfo.wAttributes;
+    printf("start main\n");
+}
+__attribute__((destructor))
+void destruct(){
+  printf("end main\n");
 }
 #else
 #define Error(fmt,...) do{}whiile(0);
 #endif
 
+void func(){
+  func();
+}
 int main() {
+  char str[1];
   printf("normal\n");
+  func();
 
   Error("hello %s","world")
   Warning("warning %s","world")
