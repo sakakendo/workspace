@@ -1,0 +1,13 @@
+
+# coding: utf-8
+# Here your code !
+
+m,n=input().split()
+
+print("m:"+m+" n:"+n)
+
+x=int(n)-int(m)
+if x<0:
+    print("No")
+else:
+    print(x)

@@ -1,0 +1,13 @@
+
+leng=input()
+min,max,tmp=0,200,0
+for i in range(int(leng)):
+    h,c=input().split()
+    if h=="le" and max>float(c):
+        max=float(c)
+    elif h=="ge" and min<float(c):
+        min=float(c)
+#    print(""+h+" "+c)
+
+#print("min:"+str(min)+"max"+str(max))
+print(str(min)+" "+str(max)) 
